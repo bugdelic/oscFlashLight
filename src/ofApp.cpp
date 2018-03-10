@@ -20,6 +20,7 @@ void ofApp::setup(){
 
     gui.add(pointX.setup("start position X", 200, 0, ofGetWidth()));
     gui.add(pointY.setup("start position Y", 200, 0, ofGetHeight()));
+    gui.add(printInterval.setup("print iterval", 5, 1, 60));
     gui.add(widthX.setup("draw width", 200, 0, ofGetWidth()));
     gui.add(widthY.setup("draw height", 200, 0, ofGetHeight()));
     gui.add(flashCount.setup("flash count", 100, 1, 300));
@@ -44,9 +45,13 @@ void ofApp::update(){
             
             // flash指示
             if (message.getAddress() == "/osc/flashlight") {
-                if (message.getNumArgs() > 2) {
-                    flashColor = ofColor(message.getArgAsInt(0), message.getArgAsInt(1), message.getArgAsInt(2));
+                if (message.getNumArgs() > 0) {
+                    printInterval = message.getArgAsInt(0);
                 }
+                if (message.getNumArgs() > 3) {
+                    flashColor = ofColor(message.getArgAsInt(1), message.getArgAsInt(2), message.getArgAsInt(3));
+                }
+                sleep(printInterval);
                 isFlashing = true;
                 flashCounter = 0;
             }

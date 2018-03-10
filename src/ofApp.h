@@ -33,6 +33,7 @@ class ofApp : public ofBaseApp{
         ofxPanel gui;
         ofxIntSlider pointX, pointY;
         ofxIntSlider widthX, widthY;
+        ofxIntSlider printInterval;
         ofxColorSlider flashColor;
         ofxIntSlider flashCount;
         ofxIntSlider flashTiming;
